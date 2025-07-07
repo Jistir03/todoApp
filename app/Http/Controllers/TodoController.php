@@ -53,6 +53,23 @@ class TodoController extends Controller
         return redirect('/todo')->with('success', 'Todo updated successfully.');
     }
 
+
+    public function setAsComplete(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|integer|exists:todo_table,ID',
+        ]);
+
+        DB::update(
+            'UPDATE todo_table SET IS_COMPLETED = ?, COMPLETED_AT = NOW(), UPDATED_AT = NOW() WHERE ID = ?',
+            [1, $request->id]
+        );
+
+        return redirect('/todo')->with('success', 'Todo marked as completed.');
+    }
+
+
+
     private function validateTodo(Request $request): array
     {
         return $request->validate([

@@ -17,6 +17,7 @@ const Index = () => {
         setFilterDate,
         filteredTodos,
         handleEdit,
+        handleComplete,
     } = useTodo();
 
     return (
@@ -52,7 +53,11 @@ const Index = () => {
                     />
                 )}
 
-                <TodoList todos={filteredTodos} onEdit={handleEdit} />
+                <TodoList
+                    todos={filteredTodos}
+                    onEdit={handleEdit}
+                    onCompleted={handleComplete}
+                />
             </div>
         </div>
     );

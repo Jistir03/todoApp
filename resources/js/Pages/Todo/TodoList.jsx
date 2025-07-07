@@ -3,7 +3,7 @@ import React from "react";
 import { Pencil, Trash2, CheckCircle } from "lucide-react";
 import dayjs from "dayjs";
 
-const TodoList = ({ todos, onEdit }) => {
+const TodoList = ({ todos, onEdit, onCompleted }) => {
     return (
         <div className="space-y-4">
             {todos.length > 0 ? (
@@ -30,30 +30,34 @@ const TodoList = ({ todos, onEdit }) => {
                                     "MMMM D, YYYY h:mm A"
                                 )}
                             </div>
-                            <div className="card-actions justify-end mt-2">
-                                <button
-                                    onClick={() => onEdit(todo)}
-                                    className="btn btn-outline btn-primary btn-sm"
-                                    title="Edit"
-                                >
-                                    <Pencil className="w-4 h-4" />
-                                </button>
 
-                                <button
-                                    className="btn btn-outline btn-error btn-sm"
-                                    title="Delete"
-                                >
-                                    <Trash2 className="w-4 h-4" />
-                                </button>
-                                {todo.IS_COMPLETED == 0 && (
+                            {/* ✅ Show action buttons only if NOT completed */}
+                            {todo.IS_COMPLETED == 0 && (
+                                <div className="card-actions justify-end mt-2">
                                     <button
+                                        onClick={() => onEdit(todo)}
+                                        className="btn btn-outline btn-primary btn-sm"
+                                        title="Edit"
+                                    >
+                                        <Pencil className="w-4 h-4" />
+                                    </button>
+
+                                    <button
+                                        className="btn btn-outline btn-error btn-sm"
+                                        title="Delete"
+                                    >
+                                        <Trash2 className="w-4 h-4" />
+                                    </button>
+
+                                    <button
+                                        onClick={() => onCompleted(todo.ID)}
                                         className="btn btn-outline btn-success btn-sm"
                                         title="Complete"
                                     >
                                         <CheckCircle className="w-4 h-4" />
                                     </button>
-                                )}
-                            </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                 ))

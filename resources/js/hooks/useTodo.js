@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm, usePage } from "@inertiajs/react";
-
+import { router } from "@inertiajs/react";
 export default function useTodo() {
     const { props } = usePage();
     const todos = props.todos || [];
@@ -42,7 +42,9 @@ export default function useTodo() {
             },
         });
     };
-
+    const handleComplete = (id) => {
+        router.post("/set-as-complete", { id });
+    };
     const filteredTodos = filterDate
         ? todos.filter((todo) => todo.CREATED_AT?.startsWith(filterDate))
         : todos;
@@ -58,6 +60,7 @@ export default function useTodo() {
         handleSubmit,
         toggleForm,
         setFilterDate,
-        handleEdit, // ✅ expose this so you can pass it to TodoList
+        handleEdit,
+        handleComplete,
     };
 }
