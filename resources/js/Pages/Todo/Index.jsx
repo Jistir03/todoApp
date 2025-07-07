@@ -3,6 +3,7 @@ import React from "react";
 import useTodo from "@/hooks/useTodo";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
+import DeleteModal from "./DeleteModal";
 
 const Index = () => {
     const {
@@ -18,6 +19,10 @@ const Index = () => {
         filteredTodos,
         handleEdit,
         handleComplete,
+        deletingTodoId,
+        confirmDelete,
+        handleDelete,
+        closeDeleteModal,
     } = useTodo();
 
     return (
@@ -52,11 +57,16 @@ const Index = () => {
                         processing={processing}
                     />
                 )}
-
                 <TodoList
                     todos={filteredTodos}
                     onEdit={handleEdit}
                     onCompleted={handleComplete}
+                    onDelete={confirmDelete}
+                />
+                <DeleteModal
+                    isOpen={!!deletingTodoId}
+                    onConfirm={handleDelete}
+                    onCancel={closeDeleteModal}
                 />
             </div>
         </div>

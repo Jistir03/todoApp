@@ -2,7 +2,7 @@ import React from "react";
 import { Pencil, Trash2, CheckCircle } from "lucide-react";
 import dayjs from "dayjs";
 
-const TodoList = ({ todos, onEdit, onCompleted }) => {
+const TodoList = ({ todos, onEdit, onCompleted, onDelete }) => {
     return (
         <div className="space-y-4">
             {todos.length > 0 ? (
@@ -34,11 +34,13 @@ const TodoList = ({ todos, onEdit, onCompleted }) => {
                                             <Pencil className="w-4 h-4" />
                                         </button>
                                         <button
+                                            onClick={() => onDelete(todo.ID)}
                                             className="btn btn-outline btn-error btn-sm"
                                             title="Delete"
                                         >
                                             <Trash2 className="w-4 h-4" />
                                         </button>
+
                                         <button
                                             onClick={() => onCompleted(todo.ID)}
                                             className="btn btn-outline btn-success btn-sm"

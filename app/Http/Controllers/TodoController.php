@@ -52,6 +52,16 @@ class TodoController extends Controller
 
         return redirect('/todo')->with('success', 'Todo updated successfully.');
     }
+    public function deleteTodo(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|integer|exists:todo_table,ID',
+        ]);
+
+        DB::delete('DELETE FROM todo_table WHERE ID = ?', [$request->id]);
+
+        return redirect('/todo')->with('success', 'Task Deleted successfully.');
+    }
 
 
     public function setAsComplete(Request $request)

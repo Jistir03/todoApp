@@ -7,6 +7,7 @@ export default function useTodo() {
 
     const [showForm, setShowForm] = useState(false);
     const [filterDate, setFilterDate] = useState("");
+    const [deletingTodoId, setDeletingTodoId] = useState(null);
 
     const { data, setData, post, processing, errors, reset } = useForm({
         id: null,
@@ -28,6 +29,26 @@ export default function useTodo() {
         });
         setShowForm(true);
     };
+    const confirmDelete = (id) => {
+        setDeletingTodoId(id);
+    };
+
+    const handleDelete = () => {
+        if (!deletingTodoId) return;
+
+        router.post(
+            "/delete-task",
+            { id: deletingTodoId },
+            {
+                preserveScroll: true,
+                onSuccess: () => {
+                    setDeletingTodoId(null); // Close modal
+                },
+            }
+        );
+    };
+
+    const closeDeleteModal = () => setDeletingTodoId(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -62,5 +83,10 @@ export default function useTodo() {
         setFilterDate,
         handleEdit,
         handleComplete,
+        handleComplete,
+        confirmDelete,
+        handleDelete,
+        closeDeleteModal,
+        deletingTodoId,
     };
 }
