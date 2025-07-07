@@ -10,7 +10,7 @@ const TodoForm = ({ data, errors, handleChange, handleSubmit, processing }) => {
                         <input
                             name="title"
                             type="text"
-                            placeholder=" "
+                            placeholder="Title"
                             value={data.title}
                             onChange={handleChange}
                             className={`input input-bordered w-full ${
@@ -18,12 +18,19 @@ const TodoForm = ({ data, errors, handleChange, handleSubmit, processing }) => {
                             }`}
                         />
                         <span>Title</span>
+
+                        {/* Error message */}
+                        {errors.title && (
+                            <div className="mt-1 text-error text-sm">
+                                {errors.title}
+                            </div>
+                        )}
                     </label>
 
                     <label className="form-control w-full floating-label relative">
                         <textarea
                             name="description"
-                            placeholder=" "
+                            placeholder="Description"
                             value={data.description}
                             onChange={handleChange}
                             className={`textarea textarea-bordered w-full resize-none pt-6 ${
@@ -34,6 +41,13 @@ const TodoForm = ({ data, errors, handleChange, handleSubmit, processing }) => {
                         <span className="absolute left-3 top-2 text-sm text-gray-500 bg-base-100 px-1 pointer-events-none">
                             Description
                         </span>
+
+                        {/* Error message */}
+                        {errors.description && (
+                            <div className="mt-1 text-error text-sm">
+                                {errors.description}
+                            </div>
+                        )}
                     </label>
 
                     <div className="flex justify-end">

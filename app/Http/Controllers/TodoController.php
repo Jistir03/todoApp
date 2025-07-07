@@ -45,7 +45,7 @@ class TodoController extends Controller
             'UPDATE todo_table SET TITLE = ?, DESCRIPTION = ?, UPDATED_AT = NOW() WHERE ID = ?',
             [
                 $validated['title'],
-                $validated['description'] ?? '',
+                $validated['description'],
                 $request->id,
             ]
         );
@@ -74,7 +74,7 @@ class TodoController extends Controller
     {
         return $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
+            'description' => 'required|string',
         ]);
     }
 }
